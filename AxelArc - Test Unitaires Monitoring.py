@@ -2,13 +2,13 @@
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import learning_curve
 import numpy as np
 import unittest
 
-class TestRandomForestClassifier(unittest.TestCase):
+class TestSVC(unittest.TestCase):
     def setUp(self):
         # Loading digits dataset from sklearn
         self.data = datasets.load_breast_cancer()
@@ -25,13 +25,10 @@ class TestRandomForestClassifier(unittest.TestCase):
         )
 
         # Loading classifier
-        self.sklearn_classifier = RandomForestClassifier()
+        self.sklearn_classifier = SVC()
 
     def test_sklearn_classifier(self):
         self._test_classifier(self.sklearn_classifier)
-
-    def test_cuml_classifier(self):
-        self._test_classifier(self.cuml_classifier)
 
     def _test_classifier(self, classifier):
         classifier.fit(self.X_train, self.y_train)
